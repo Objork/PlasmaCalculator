@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Space Pyhsics Course</title>
+    <title>Space Physics Course</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -96,7 +96,7 @@
             If you are interested in calculating certain properties of plasma, this calculator can help you determine
             several important plasma parameters. These include:
 
-            Alfven Velocity: the velocity at which magnetic disturbances propagate through plasma.
+            Alfvén Velocity: the velocity at which magnetic disturbances propagate through plasma.
             Debye Length: the scale length over which the plasma is shielded by its electric charges.
             Gyroradius: the radius of the circular motion that charged particles make in a magnetic field.
             Electron Plasma Frequency: the frequency at which electrons in the plasma oscillate together.
@@ -113,9 +113,9 @@
                     <h3>Parameter Inputs</h3>
                     <p>Note that all units are done in SI</p>
                     <p>Elementary charge: e = 1.60217649e-19 C</p>
-                    <p>Boltzman constant: k = 1.38065042e-23 J/K</p>
-                    <p>Vacuum Permittivity: ε = 8.85418782e-12 F/m</p>
-                    <p class="last">Magnetic constant: μ = 1.25663706e-6 mT/A</p>
+                    <p>Boltzman constant: k<sub>B</sub> = 1.38065042e-23 J/K</p>
+                    <p>Vacuum Permittivity: ε<sub>0</sub> = 8.85418782e-12 F/m</p>
+                    <p class="last">Vacuum permeability: μ<sub>0</sub> = 1.25663706e-6 H/m</p>
                     <!-- <div class="mb-3">
                         <label for="formGroupExampleInput2" class="form-label">Choose the charged particle:</label>
                         
@@ -145,7 +145,7 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Temperature [K<sup>o</sup>]</label>
+                        <label for="formGroupExampleInput2" class="form-label">Temperature [K]</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="tElec" placeholder="i.e. 1.5e5">
                         </div>
@@ -169,44 +169,44 @@
                 <div id="results" class="results">
                     <h2>Results</h2>
                     <div class="row mb-3">
-                        <label for="colFormLabel" class="col-sm-2 col-form-label">Alfven Velocity <strong> (V<sub>A</sub>) m/s</strong></label>
+                        <label for="colFormLabel" class="col-sm-2 col-form-label">Alfvén velocity <strong> (v<sub>A</sub>) m/s</strong></label>
                         <div class="col-sm-6">
                             <input type="" class="form-control" id="i1" placeholder="m/s">
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="colFormLabel" class="col-sm-2 col-form-label">Debye Lenght <strong>(λ<sub>D</sub>) m </strong></label>
+                        <label for="colFormLabel" class="col-sm-2 col-form-label">Debye length <strong>(λ<sub>D</sub>) m </strong></label>
                         <div class="col-sm-6">
                             <input type="" class="form-control" id="i2" placeholder="m">
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="colFormLabel" class="col-sm-2 col-form-label">Gyroradius <strong>(ρ) m </strong></label>
+                        <label for="colFormLabel" class="col-sm-2 col-form-label">Gyroradius <strong>(r<sub>c</sub>) m </strong></label>
                         <div class="col-sm-6">
                             <input type="" class="form-control" id="i3" placeholder="m">
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="colFormLabel" class="col-sm-2 col-form-label">Electron Plasma Frequency
-                            (Quasi-neutrality) <strong>(ω<sub>pe</sub>) rad/s</strong></label>
+                        <label for="colFormLabel" class="col-sm-2 col-form-label">Plasma frequency
+                            (Quasi-neutrality) <strong>(ω<sub>p</sub>) rad/s</strong></label>
                         <div class="col-sm-6">
                             <input type="" class="form-control" id="i4" placeholder="rad/s">
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="colFormLabel" class="col-sm-2 col-form-label">Angular Frequency <strong>(ω) rad/s</strong></label>
+                        <label for="colFormLabel" class="col-sm-2 col-form-label">Gyrofrequency <strong>(ω<sub>c</sub>) rad/s</strong></label>
                         <div class="col-sm-6">
-                            <input type="" class="form-control" id="i5" placeholder="Hz">
+                            <input type="" class="form-control" id="i5" placeholder="rad/s">
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="colFormLabel" class="col-sm-2 col-form-label">Gyrotime <strong>(τ) s</strong></label>
+                        <label for="colFormLabel" class="col-sm-2 col-form-label">Gyro period <strong>(T<sub>c</sub>) s</strong></label>
                         <div class="col-sm-6">
                             <input type="" class="form-control" id="i6" placeholder="s">
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="colFormLabel" class="col-sm-2 col-form-label">Thermal Velocity <strong>(V<sub>te</sub>) m/s</strong>
+                        <label for="colFormLabel" class="col-sm-2 col-form-label">Thermal Velocity <strong>(v<sub>th</sub>) m/s</strong>
                         </label>
                         <div class="col-sm-6">
                             <input type="" class="form-control" id="i7" placeholder="m/s">
@@ -220,7 +220,7 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="colFormLabel" class="col-sm-2 col-form-label">Alfven Mach Number <strong>(M<sub>A</sub>)</strong>
+                        <label for="colFormLabel" class="col-sm-2 col-form-label">Alfvén Mach Number <strong>(M<sub>A</sub>)</strong>
                         </label>
                         <div class="col-sm-6">
                             <input type="" class="form-control" id="i9" >

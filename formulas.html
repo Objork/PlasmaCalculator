@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Space Pyhsics Course</title>
+    <title>Space Physics Course</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,22 +53,23 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">Alfven Velocity</th>
+            <th scope="row">Alfvén velocity</th>
             <td><math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-                <mi>V</mi>
+                <mi>
+                    <msub>
+                        <mi>v</mi>
+                        <mn>A</mn>
+                    </msub>
+                </mi>
                 <mo>=</mo>
                 <mrow data-mjx-texclass="ORD">
                     <mfrac>
                         <mrow>
-                            <mi>Magnetic Field</mi>
+                            <mi>Magnetic field</mi>
                         </mrow>
                         <msqrt>
-                            <mi>Magnetic constant . Number density . Ion mass </mi>
-
+                            <mi>Vacuum permeability &times; Number density &times; Particle mass </mi>
                         </msqrt>
-                </mrow>
-
-                </mfrac>
                 </mrow>
 
                 <mo>=</mo>
@@ -78,26 +79,35 @@
                             <mi>B</mi>
                         </mrow>
                         <msqrt>
-                            <mi>&mu; . </mi>
-                            <mi>&rho; .</mi>
+                            <msub>
+                                <mi>&mu; </mi>
+                                <mn>0</mn>
+                            </msub>
+                            <mspace width="thinmathspace"/>
+                            <mi>n</mi>
+                            <mspace width="thinmathspace"/>
                             <mi>m</mi>
                         </msqrt>
                 </mrow>
-
-                </mfrac>
-                </mrow>
             </math></td>
           </tr>
+          
           <tr>
-            <th scope="row">Debye Lenght</th>
+            <th scope="row">Debye length</th>
             <td><math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-                <mi>&lambda;</mi>
+                <mi>
+                    <msub>
+                        <mi>&lambda;</mi>
+                        <mn>D</mn>
+                    </msub>
+                </mi>
                 <mo>=</mo>
                 <msqrt>
                     <mfrac>
-                        <mn>VacuumPermittivity . BoltzmannConst . Temperature</mn>
-                        <mi>NumberDensity . <msup>
-                                <mi>ElementaryCharge</mi>
+                        <mn>Vacuum permittivity &times; Boltzmann constant &times; Temperature</mn>
+                        <mi>Number density &times; 
+                            <msup>
+                                <mi>Elementary charge</mi>
                                 <mn>2</mn>
                             </msup>
                         </mi>
@@ -107,18 +117,33 @@
                 <mo>=</mo>
                 <msqrt>
                     <mfrac>
-                        <mn>&epsilon; . k . T</mn>
-                        <mi>&mu; . <msup>
+                        <mrow>
+                            <msub>
+                                <mi>&epsilon;</mi>
+                                <mn>0</mn>
+                            </msub>
+                            <mspace width="thinmathspace"/>
+                            <msub>
+                                <mi>k</mi>
+                                <mn>B</mn>
+                            </msub>
+                            <mspace width="thinmathspace"/>
+                            <mi>T</mi>
+                        </mrow>
+                        <mrow>
+                            <mi>n</mi>
+                            <mspace width="thinmathspace"/>
+                            <msup>
                                 <mi>e</mi>
                                 <mn>2</mn>
                             </msup>
-                        </mi>
+                        </mrow>
                     </mfrac>
-
                 </msqrt>
             </math></td>
             
           </tr>
+
           <tr>
             <th scope="row">Gyroradius</th>
             <td colspan="2"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
@@ -132,146 +157,173 @@
                 <mrow data-mjx-texclass="ORD">
                     <mfrac>
                         <mrow>
-                            <mi>Ion mass . Bulk velocity</mi>
+                            <mi>Particle mass &times; Perpendicular velocity</mi>
                         </mrow>
 
-                        <mi>ElementaryCharge. MagneticField </mi>
-
-                        </msqrt>
-                </mrow>
-
-                </mfrac>
+                        <mi>Elementary charge &times; Magnetic field </mi>
+                    </mfrac>
                 </mrow>
 
                 <mo>=</mo>
                 <mrow data-mjx-texclass="ORD">
                     <mfrac>
                         <mrow>
-                            <mi>m . V</mi>
+                            <mi>m</mi>
+                            <mspace width="thinmathspace"/>
+                            <msub>
+                                <mi>v</mi>
+                                <mn>&perp;</mn>
+                            </msub>
                         </mrow>
-
-                        <mi>e . B </mi>
-
-                        </msqrt>
-                </mrow>
-
-                </mfrac>
+                        <mrow>
+                            <mi>e</mi>
+                            <mspace width="thinmathspace"/>
+                            <mi>B</mi>
+                        </mrow>     
+                    </mfrac>
                 </mrow>
             </math></td>
            
           </tr>
           <tr>
-            <th scope="row">Electron Plasma Frequency (Quasi-neutrality)</th>
+            <th scope="row">Plasma Frequency (Quasi-neutrality)</th>
             <td colspan="2"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
                 <mi>
                     <msub>
                         <mi>&omega;</mi>
-                        <mn>pe</mn>
+                        <mn>p</mn>
                     </msub>
                 </mi>
                 <mo>=</mo>
                 <msqrt>
                     <mfrac>
-                        <mn>NumberDensity . <msup>
-                                <mi>ElementaryCharge</mi>
+                        <mn>Number density &times; 
+                            <msup>
+                                <mi> Elementary charge</mi>
                                 <mn>2</mn>
                             </msup>
                         </mn>
-                        <mi>VacuumPermittivity . Ion Mass</mi>
+                        <mi>Vacuum permittivity &times; Particle mass</mi>
                     </mfrac>
 
                 </msqrt>
                 <mo>=</mo>
                 <msqrt>
                     <mfrac>
-                        <mn>&rho; . <msup>
+                        <mrow>
+                            <mi>n</mi>
+                            <mspace width="thinmathspace"/>
+                            <msup>
                                 <mi>e</mi>
                                 <mn>2</mn>
                             </msup>
-                        </mn>
-                        <mi>&epsilon; . m</mi>
+                        </mrow>
+                        <mrow>
+                            <msub>
+                                <mi>&epsilon;</mi>
+                                <mn>0</mn>
+                            </msub>
+                            <mspace width="thinmathspace"/>
+                            <mi>m</mi>
+                        </mrow>
                     </mfrac>
-
                 </msqrt>
             </math></td>
             
           </tr>
           <tr>
-            <th scope="row">Angular Frequency</th>
+            <th scope="row">Gyrofrequency</th>
             <td colspan="2"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
                 <mi>
                     <msub>
                         <mi>&omega;</mi>
-                        <mn>ci</mn>
+                        <mn>c</mn>
                     </msub>
                 </mi>
                 <mo>=</mo>
 
                 <mfrac>
-                    <mn>ElementaryCharge . MagneticField</mn>
-                    <mi>Ion Mass</mi>
+                    <mn>Elementary charge &times; Magnetic field</mn>
+                    <mi>Particle mass</mi>
                 </mfrac>
-
-
                 <mo>=</mo>
-
                 <mfrac>
-                    <mn>e . B</mn>
-                    <mi>m</mi>
+                    <mrow>
+                        <mn>e</mn>
+                        <mspace width="thinmathspace"/>
+                        <mn>B</mn>
+                    </mrow>
+                    <mrow>
+                        <mn>m</mn>
+                    </mrow>
                 </mfrac>
-
-
             </math></td>
           
           </tr>
           <tr>
-            <th scope="row">Gyrotime</th>
+            <th scope="row">Gyro period</th>
             <td colspan="2"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
                 <mi>
                     <msub>
                         <mi>T</mi>
-                        <mn>ci</mn>
+                        <mn>c</mn> 
                     </msub>
                 </mi>
                 <mo>=</mo>
 
                 <mfrac>
-                    <mn>2 . &pi;</mn>
-                    <mi>
-                        <msub>
-                            <mi>&omega;</mi>
-                            <mn>ci</mn>
-                        </msub>
-                    </mi>
+                    <mrow>
+                        <mn>2</mn>
+                        <mspace width="thinmathspace"/>
+                        <mn>&pi;</mn>
+                    </mrow>
+                    <mrow>
+                        <mi>
+                            <msub>
+                                <mi>&omega;</mi>
+                                <mn>c</mn>
+                            </msub>
+                        </mi>
+                    </mrow>
                 </mfrac>
 
             </math> </td>
          
           </tr>
           <tr>
-            <th scope="row">Electron Thermal Velocity</th>
+            <th scope="row">Thermal Velocity</th>
             <td colspan="2"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
                 <mi>
                     <msub>
-                        <mi>V</mi>
-                        <mn>T</mn>
+                        <mi>v</mi>
+                        <mn>th</mn>
                     </msub>
                 </mi>
                 <mo>=</mo>
                 <msqrt>
                     <mfrac>
-                        <mn>2. BoltzmannConst . Temperature </mn>
-                        <mi>Ion Mass</mi>
+                        <mn>2 &times; Boltzmann constant &times; Temperature </mn>
+                        <mi>Particle mass</mi>
                     </mfrac>
 
                 </msqrt>
                 <mo>=</mo>
                 <msqrt>
                     <mfrac>
-                        <mn>2. k . T </mn>
-                        <mi>m</mi>
+                        <mrow>
+                            <mn>2</mn>
+                            <mspace width="thinmathspace"/>
+                            <msub>
+                                <mi>k</mi>
+                                <mn>B</mn>
+                            </msub>
+                            <mspace width="thinmathspace"/>
+                            <mn>T</mn>
+                        </mrow>
+                        <mrow>
+                            <mn>m</mn>
+                        </mrow>
                     </mfrac>
-
                 </msqrt>
             </math></td>
            
