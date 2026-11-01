@@ -48,15 +48,45 @@
 
 
     <h1 class="display-4 text-center" style="color: #4981aa;">ParaView Online Visualization</h1>
+    <div>
+        <h2 class="earth">Choose celestial body</h2>
+                <select class="form-select mx-auto" aria-label="Default select example" onchange="enableBrand(this)"
+                    style="background-color: #4981aa; width: 200px; margin-bottom: 50px; padding: 10px; color: white; font-weight: 600;">
+                    <option selected>Celestial Body</option>
+                    <option value="1">Mercury</option>
+                    <option value="2">Venus</option>
+                    <option value="3">Luna (Earth's Moon)</option>
+                    <option value="4">Comet 2.4 AU</option>
+                </select>
+    </div> 
 
+   <iframe id='iframe' style='display:block; margin:0 auto; border:0; width:90vw; height:85vh;'></iframe>
    <script>
     var app="https://kitware.github.io/paraview-glance/app";
-    var datadir="https://raw.githubusercontent.com/Objork/PlasmaCalculator/main/";
-    var file="Mercury_flyby_mission.vtkjs";
+    var datadir="https://raw.githubusercontent.com/Objork/PlasmaCalculator/test_version/";
+    
+    var files = {
+        1: "Mercury_flyby_mission.vtkjs",
+        2: "venus.vtkjs",
+        3: "luna.vtkjs",
+        4: "comet.vtkjs"
+    }
 
-    document.write("<iframe src='"+app+"?name="+file+"&url="+datadir+file+"' id='iframe' width='1400' height='900'></iframe>");
+    function loadFile(file) {
+        document.getElementById('iframe').src = app + "?name=" + encodeURIComponent(file) + "&url=" + encodeURIComponent(datadir + file);
+    }
+
+    function enableBrand(sel) {
+        var file = files[sel.value];
+        if (file) {
+            loadFile(file);
+        }
+    }
+    document.querySelector("select").value = 1;
+    loadFile(files[1]);
 
    </script>
+
     <div class="footer1" id="contact">
         <footer class="text-center text-white" style="background-color: #4981aa;">
             <!-- Grid container -->
