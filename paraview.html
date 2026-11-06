@@ -60,10 +60,57 @@
                 </select>
     </div> 
 
-   <iframe id='iframe' style='display:block; margin:0 auto; border:0; width:90vw; height:85vh;'></iframe>
+    
+   <style>
+    .viewer {
+        position: relative;
+        width: 90vw;
+        height: 85vh;
+        margin: 0 auto;
+    }
+    .viewer iframe {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+    #infoOverlayBtn {
+        position: absolute;
+        bottom: 10px;
+        right: 180px;
+        z-index: 10;
+        background-color: #272727;
+        color: white;
+        font-weight: bold;
+        border: none;
+        padding: 2px 4px;
+        cursor: pointer;
+    }
+    #infoPanel {
+        position: absolute;
+        top: 80px;
+        left: 350px;
+        z-index: 10;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 5px;
+        display: none; 
+    }
+   </style>
+
+   <div class="viewer">
+        <iframe id='iframe' style='display:block; margin:0 auto; border:0; width:90vw; height:85vh;'></iframe>
+        <button id="infoOverlayBtn"> Information </button>
+        <div id = "infoPanel">
+            <h3 id = "infoTitle"></h3>
+            <p id = "infoText"></p>
+        </div>
+    </div>
+
    <script>
     var app="https://kitware.github.io/paraview-glance/app";
     var datadir="https://raw.githubusercontent.com/Objork/PlasmaCalculator/test_version/CelestialBodiesFiles/";
+    var infoUrl = datadir + "celestial_bodies_info.json"
     
     var files = {
         1: "mercury.vtkjs",
@@ -72,8 +119,19 @@
         4: "comet2_4.vtkjs"
     }
 
+    var info = {};
+    var currentFile = null;
+
+    function updateInfoPanel(file) {
+        var infoEntry = info[file] || {title: "Unknown", text: "No information available."};
+        document.getElementById("infoTitle").textContent = infoEntry.title;
+        document.getElementById("infoText").textContent = infoEntry.text;
+    }
+
     function loadFile(file) {
+        currentFile = file;
         document.getElementById('iframe').src = app + "?name=" + encodeURIComponent(file) + "&url=" + encodeURIComponent(datadir + file);
+        updateInfoPanel(file);
     }
 
     function enableBrand(sel) {
@@ -82,8 +140,25 @@
             loadFile(file);
         }
     }
-    document.querySelector("select").value = 1;
+    
+
+    document.getElementById("infoOverlayBtn").addEventListener("click", function() {
+        var infoPanel = document.getElementById("infoPanel");
+        if (infoPanel.style.display === "none") {
+            infoPanel.style.display = "block";
+        } else {
+            infoPanel.style.display = "none";
+        }
+    });
+
     loadFile(files[1]);
+    fetch(infoUrl)
+        .then(response => response.json())
+        .then(data => {
+            info = data;
+            updateInfoPanel(currentFile);
+        })
+        .catch(error => console.error('Error loading info JSON:', error));
 
    </script>
 
