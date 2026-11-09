@@ -1,6 +1,13 @@
 {
   "dependencies": {
     "lodash": "^4.17.21",
-    "pvw-visualizer": "^3.2.2"
+    "pvw-visualizer": "^3.2.2",
+    "three": "^0.128.0"
+  },
+
+  "overrides": {
+    "shelljs": "^0.8.5"
   }
+
 }
+

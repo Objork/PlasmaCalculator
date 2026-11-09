@@ -46,7 +46,7 @@
                         <a class="nav-link" href="paraview.html" target="_blank">ParaView Visualization</a>
                     </li>
                     <li class ="nav-item">
-                        <a class="nav-link" href="spaceAR.html" target="_blank">Space AR</a>
+                        <a class="nav-link" href="spaceAR/spaceAR.html" target="_blank">Space AR</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
@@ -71,13 +71,13 @@
               
               <p class="card-text" style="text-align: justify;">A portal dedicated to the exploration of fundamental plasma parameters and plasma regions. 
                 Our platform offers a unique and interactive experience, allowing you to delve into the intriguing world of plasma physics with ease. 
-                At the core of our website is a powerful calculator that enables you to compute essential plasma properties such as the Alfvén velocity, Debye length, gyroradius, plasma frequency (maintaining Quasi-neutrality), gyrofrequency, gyro period and thermal velocity. 
+                At the core of our website is a powerful calculator that enables you to compute essential plasma properties such as the Alfvén velocity, Debye length, gyroradius, plasma frequency (maintaining quasi-neutrality), gyrofrequency, gyroperiod and thermal velocity. 
                 These calculations provide valuable insights into the behavior of plasma in various contexts. 
                 But that's not all, as our website goes beyond calculations and simple 2D visualizations. 
                 We also offer a visual journey through our interactive plots, providing you with a comprehensive understanding of phenomena like the bow shock and magnetopause around each celestial body within our solar system. 
                 Delve deeper into the intricacies of plasma science as we guide you through the key plasma regions: "the bow shock," "the magnetosheath," "the magnetopause," "the magnetic barrier," "the magnetosphere," "the magnetotail," and "the wake cavity." 
                 Explore the boundaries and interactions that define these regions, expanding your knowledge of plasma dynamics in space. 
-                Additionally, we provide access to a Paraview section, allowing you to analyze files based on the MULTI hybrid model simulation. 
+                Additionally, we provide access to a ParaView section, allowing you to analyze files based on the MULTI hybrid model simulation. 
                 Here, you can explore various solar wind interactions with Solar System objects, gaining valuable insights into complex plasma phenomena.</div>
           </div>
         </div>
@@ -97,16 +97,18 @@
             system of charged particles responding collectively to electromagnetic forces.
 
             If you are interested in calculating certain properties of plasma, this calculator can help you determine
-            several important plasma parameters. These include:
+            several important plasma parameters. These include:<br>
 
-            Alfvén velocity: the velocity at which magnetic disturbances propagate through plasma.
-            Debye length: the scale length over which the plasma is shielded by its electric charges.
-            Gyroradius: the radius of the circular motion that charged particles make in a magnetic field.
-            Plasma frequency: the frequency at which particles in the plasma oscillate together.
-            Gyrofrequency: the rate at which a particle rotates in a circular path.
-            Gyro period: the time it takes for a particle to complete one full circular motion in a magnetic field.
-            Thermal velocity: the average velocity of particles in the plasma due to thermal motion.
-            If you want to learn more about how these plasma parameters are calculated, please click <a
+            <b>Alfvén velocity:</b> the velocity at which magnetic disturbances propagate through plasma.<br>
+            <b>Debye length:</b> the scale length over which the plasma is shielded by its electric charges.<br>
+            <b>Gyroradius:</b> the radius of the circular motion that charged particles make in a magnetic field.<br>
+            <b>Plasma frequency:</b> the frequency at which particles in the plasma oscillate together.<br>
+            <b>Gyrofrequency:</b> the rate at which a particle rotates in a circular path.<br>
+            <b>Gyroperiod:</b> the time it takes for a particle to complete one full circular motion in a magnetic field.<br>
+            <b>Thermal velocity:</b> the average velocity of particles in the plasma due to thermal motion.<br>
+            <b>Sonic Mach number:</b> the ratio of the plasma flow speed to the sound speed in the plasma.<br>
+            <b>Alfvén Mach number:</b> the ratio of the plasma flow speed to the Alfvén speed in the plasma.<br>
+            If you want to learn more about how these plasma parameters are calculated, please click the <a
                 href="formulas.html" target="_blank">info</a> link to see the equations.</p>
     </div>
     <div id="calculator">
@@ -119,17 +121,7 @@
                     <p>Boltzman constant: k<sub>B</sub> = 1.38065042e-23 J/K</p>
                     <p>Vacuum Permittivity: ε<sub>0</sub> = 8.85418782e-12 F/m</p>
                     <p class="last">Vacuum permeability: μ<sub>0</sub> = 1.25663706e-6 H/m</p>
-                    <!-- <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Choose the charged particle:</label>
-                        
-                            <select class="form-select" id="chargedParticle">
-                                <option selected value="electron">Electron</option>       
-                                <option value="proton">Proton/Neutron</option>
-                            </select>
-                        
-                    </div> -->
-
-
+                   
                     <select class="form-select" aria-label="Default select example" id="chargedParticle"
                         style="background-color: #4981aa; width: 250px; margin-bottom: 50px; padding: 10px; color: white; font-weight: 600;">
                         <option selected>Select charged particle</option>
@@ -137,7 +129,6 @@
                         <option value="proton">Proton/Neutron</option>
 
                     </select>
-
 
 
 
@@ -191,7 +182,7 @@
                     </div>
                     <div class="row mb-3">
                         <label for="colFormLabel" class="col-sm-2 col-form-label">Plasma frequency
-                            (Quasi-neutrality) <strong>(ω<sub>p</sub>) rad/s</strong></label>
+                            (quasi-neutrality) <strong>(ω<sub>p</sub>) rad/s</strong></label>
                         <div class="col-sm-6">
                             <input type="" class="form-control" id="i4" placeholder="rad/s">
                         </div>
@@ -203,27 +194,27 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="colFormLabel" class="col-sm-2 col-form-label">Gyro period <strong>(T<sub>c</sub>) s</strong></label>
+                        <label for="colFormLabel" class="col-sm-2 col-form-label">Gyroperiod <strong>(T<sub>c</sub>) s</strong></label>
                         <div class="col-sm-6">
                             <input type="" class="form-control" id="i6" placeholder="s">
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="colFormLabel" class="col-sm-2 col-form-label">Thermal Velocity <strong>(v<sub>th</sub>) m/s</strong>
+                        <label for="colFormLabel" class="col-sm-2 col-form-label">Thermal velocity <strong>(v<sub>th</sub>) m/s</strong>
                         </label>
                         <div class="col-sm-6">
                             <input type="" class="form-control" id="i7" placeholder="m/s">
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="colFormLabel" class="col-sm-2 col-form-label">Sonic Mach Number <strong>(M<sub>s</sub>) </strong>
+                        <label for="colFormLabel" class="col-sm-2 col-form-label">Sonic Mach number <strong>(M<sub>s</sub>) </strong>
                         </label>
                         <div class="col-sm-6">
                             <input type="" class="form-control" id="i8" >
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="colFormLabel" class="col-sm-2 col-form-label">Alfvén Mach Number <strong>(M<sub>A</sub>)</strong>
+                        <label for="colFormLabel" class="col-sm-2 col-form-label">Alfvén Mach number <strong>(M<sub>A</sub>)</strong>
                         </label>
                         <div class="col-sm-6">
                             <input type="" class="form-control" id="i9" >

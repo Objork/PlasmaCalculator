@@ -17,7 +17,6 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
 
-
 </head>
 
 <body>
@@ -96,6 +95,13 @@
         border-radius: 5px;
         display: none; 
     }
+    #infoPanel.open {
+        display: block; 
+    }
+    #infoOverlayBtn.hidden {
+        display: none; 
+    }
+
    </style>
 
    <div class="viewer">
@@ -122,16 +128,47 @@
     var info = {};
     var currentFile = null;
 
+    var iframe = document.getElementById('iframe');
+    var infoBtn = document.getElementById('infoOverlayBtn');
+    var infoPanel = document.getElementById('infoPanel');
+
     function updateInfoPanel(file) {
         var infoEntry = info[file] || {title: "Unknown", text: "No information available."};
         document.getElementById("infoTitle").textContent = infoEntry.title;
         document.getElementById("infoText").textContent = infoEntry.text;
     }
 
+    var loadId = 0;
+
     function loadFile(file) {
-        currentFile = file;
-        document.getElementById('iframe').src = app + "?name=" + encodeURIComponent(file) + "&url=" + encodeURIComponent(datadir + file);
-        updateInfoPanel(file);
+    currentFile = file;
+    var myId = ++loadId;
+
+    infoBtn.classList.add("hidden");
+    infoPanel.classList.remove("open");
+    updateInfoPanel(file);
+
+    var iframeReady = false;
+    var fileReady = false;
+
+    function maybeShow() {
+        if (myId !== loadId) return;
+        if (iframeReady && fileReady) {
+        setTimeout(function () {
+            if (myId === loadId) infoBtn.classList.remove("hidden");
+        }, 500);
+        }
+    }
+
+    iframe.onload = function () { iframeReady = true; maybeShow(); };
+
+    fetch(datadir + file)
+        .then(function (r) { return r.blob(); })
+        .catch(function () {})
+        .then(function () { fileReady = true; maybeShow(); });
+
+    iframe.src = app + "?name=" + encodeURIComponent(file) +
+                "&url=" + encodeURIComponent(datadir + file);
     }
 
     function enableBrand(sel) {
@@ -142,16 +179,12 @@
     }
     
 
-    document.getElementById("infoOverlayBtn").addEventListener("click", function() {
-        var infoPanel = document.getElementById("infoPanel");
-        if (infoPanel.style.display === "none") {
-            infoPanel.style.display = "block";
-        } else {
-            infoPanel.style.display = "none";
-        }
+    infoBtn.addEventListener("click", function() {
+        infoPanel.classList.toggle("open");
     });
 
     loadFile(files[1]);
+
     fetch(infoUrl)
         .then(response => response.json())
         .then(data => {

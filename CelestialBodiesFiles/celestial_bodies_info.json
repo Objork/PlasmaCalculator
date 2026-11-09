@@ -1,0 +1,18 @@
+{
+    "mercury.vtkjs": {
+        "title": "Mercury",
+        "text": "Text about Mercury"
+    },
+    "venus.vtkjs": {
+        "title": "Venus",
+        "text": "Text about Venus"
+    },
+    "luna.vtkjs": {
+        "title": "The Moon (Luna)",
+        "text": "Text about the Moon"
+    },
+    "comet2_4.vtkjs": {
+        "title": "Comet 2.4 AU",
+        "text": "Text about the comet"
+    }
+}
