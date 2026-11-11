@@ -16,6 +16,74 @@
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .ar-page .planet-viewer {
+            position: relative;
+            flex: 1 0 auto;
+            min-height: 400px;
+            background: #000;
+            
+        }
+
+        .ar-page .planet-viewer #brain-container {
+            position: absolute;
+            inset: 0;
+            
+        }
+
+        .ar-page .planet-viewer #brain-container canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            
+        }
+        html,
+        body.ar-page {
+            margin: 0;
+            padding: 0;
+        }
+        body.ar-page {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            }
+
+        .ar-page .footer1 {
+            margin: 0 !important;
+            padding: 0 !important;
+            height: auto !important;
+            }
+
+        .ar-page .footer1 footer {
+            margin: 0 !important;
+        }
+
+        .ar-page .planet-buttons {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 10;
+            display: flex;
+            gap: 8px;
+        }
+
+        .ar-page .planet-buttons button {
+            padding: 8px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(20, 24, 36, 0.8);
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .ar-page .planet-buttons button.active {
+            background: #f0a35e;
+            color: #1a1008;
+            border-color: #f0a35e;
+        }
+    </style>
     <script type="importmap">
     {
     "imports": {
@@ -53,9 +121,15 @@
         </div>
     </nav>
 
-    <div class="brain-container" id="brain-container"></div>
-        <script type="module" src="spaceARBrain.js"></script>
+    <div class="planet-viewer">
+        <div class="planet-buttons">
+            <button id="venus-button" class="active">Venus</button>
+            <button id="mercury-button">Mercury</button>
+        </div>
+        <div class="brain-container" id="brain-container"></div>
     </div>
+
+    <script type="module" src="spaceARBrain.js"></script>
 
     <div class="footer1" id="contact">
         <footer class="text-center text-white" style="background-color: #4981aa;">
