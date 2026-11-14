@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 
+
 const TEXTURE_FILES = {
     mercury_surface_comp: "spaceAR_textures/Mercury_MESSENGER_MDIS_Basemap_EnhancedColor_Mosaic_Global_8192.png",
     mercury_surface_albedo: "spaceAR_textures/Mercury_MESSENGER_mosaic_global_500m_2013.png",
@@ -32,9 +33,16 @@ const COLOR_MAP = [
     [240, 249, 33],
 ]
 
+const VENUS_O_CONTOURS = ["o1", "o2", "o3"];
+
+const CONTOUR_COLORS = {
+  o1: [0.12, 0.15, 0.78],
+  o2: [1.0, 0.66, 0.80],
+  o3: [1.0, 0.66, 0.80]
+}
+
 const container = document.getElementById("brain-container");
 
-const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
 camera.position.set(3, 3, 10);
 
@@ -44,6 +52,8 @@ container.appendChild(renderer.domElement);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.target.set(0, 0, 0);
+controls.enableDamping = true;
+controls.rotationSpeed = 0.5;
 controls.update();
 
 function resize() {
@@ -61,6 +71,16 @@ const venus_scene = new THREE.Scene();
 const mercury_scene = new THREE.Scene();
 
 let active_scene = venus_scene;
+
+const MERCURY_TEXTURES = {
+  albedo: TEXTURE_FILES.mercury_surface_albedo,
+  composition: TEXTURE_FILES.mercury_surface_comp
+}
+
+const layers = {venus: {planet:[], lines: [], contours: []}, mercury: {planet:[], lines:[]},};
+
+const textureLoader = new THREE.TextureLoader();
+const textureCache = {};
 
 const PLANETS = {
     venus: { scene: venus_scene, texture: TEXTURE_FILES.venus_surface, texture_rotation: Math.PI },
@@ -101,6 +121,45 @@ function createFieldLines(data) {
   return new THREE.LineSegments(geometry, new THREE.LineBasicMaterial({ vertexColors: true }));
 }
 
+function createOxygenCountour(mesh) {
+  const pos = Array.from(new Int16Array(deodeData(mesh.v).buffer), v => v / 1000);
+  const normals = new Int16Array(deodeData(mesh.n).buffer);
+  const indices = new Uint16Array(deodeData(mesh.i).buffer);
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  geometry.setAttribute("normal", new THREE.Float32BufferAttribute(normals, 3));
+  geometry.setIndex(new THREE.BufferAttribute(indices, 1));
+  return geometry;
+}
+
+function createContourMaterial(color) {
+  const countour = new THREE.ShaderMaterial({
+    uniforms: {uColor: {value: new THREE.Vector3(...color)}},
+    transparent: true,
+    depthWrite: false,
+    side: THREE.DoubleSide,
+    vertexShader: `
+      varying vec3 vNormal;
+      varying vec3 vToCamera;
+      void main() {
+        vec4 viewPosition = modelViewMatrix * vec4(position, 1.0);
+        vNormal = normalize(normalMatrix * normal);
+        vToCamera = normalize(-viewPosition.xyz);
+        gl_Position = projectionMatrix * viewPosition;
+      }`,
+    fragmentShader: `
+      uniform vec3 uColor;
+      varying vec3 vNormal;
+      varying vec3 vToCamera;
+      void main() {
+        float rim = pow(1.0 - abs(dot(normalize(vNormal), normalize(vToCamera))), 2.0);
+        gl_FragColor = vec4(uColor, 0.1 + 0.3 * rim);
+      }`,
+  });
+  return countour
+}
+
+
 async function loadJson(file) {
   const response = await fetch(file);
   if (!response.ok) {
@@ -125,8 +184,20 @@ async function buildScenes() {
     planet.rotation.y = planetSetup.texture_rotation;
     planet.position.set(...planetMeshes[planetName].offset);
     worldGroup.add(planet);
+    layers[planetName].planet.push(planet);
+    for (const group of Object.values(lines[planetName])){
+      const lineObj = createFieldLines(group);
+      layers[planetName].lines.push(lineObj);
+      worldGroup.add(lineObj)
+    }
+    if (planetName === "venus") {
+      for (const key of VENUS_O_CONTOURS) {
+        const shell = new THREE.Mesh(createOxygenCountour(meshes[key]), createContourMaterial(CONTOUR_COLORS[key]));
+        layers.venus.contours.push(shell);
+        worldGroup.add(shell)
+      }
+    }
 
-    worldGroup.add(createFieldLines(lines[planetName]));
     planetSetup.scene.add(worldGroup);
   }
 } 
@@ -136,18 +207,71 @@ buildScenes().catch((error) => {
 
 document.getElementById("venus-button").addEventListener("click", () => {
   active_scene = venus_scene;
+  showOptions("venus")
   document.getElementById("venus-button").classList.add("active");
   document.getElementById("mercury-button").classList.remove("active");
 });
 
 document.getElementById("mercury-button").addEventListener("click", () => {
   active_scene = mercury_scene;
+  showOptions("mercury")
   document.getElementById("mercury-button").classList.add("active");
   document.getElementById("venus-button").classList.remove("active");
 })
 
+document.getElementById("auto-rotate-button").addEventListener("click", () => {
+  controls.autoRotate = !controls.autoRotate;
+  document.getElementById("auto-rotate-button").classList.toggle("active", controls.autoRotate);
+});
+
+
+function showOptions(planetName) {
+  document.getElementById("venus-panel").hidden = planetName !== "venus";
+  document.getElementById("mercury-panel").hidden = planetName !== "mercury";
+
+}
+showOptions("venus");
+
+function setVisible(objects, visible) {
+  for (const object of objects) object.visible = visible;
+}
+
+function onCheckbox(id, action) {
+  document.getElementById(id).addEventListener("change", (event) => action(event.target.checked));
+}
+
+onCheckbox("venus-planet-toggle", (on) => setVisible(layers.venus.planet, on));
+onCheckbox("venus-B-toggle", (on) => setVisible(layers.venus.lines, on));
+onCheckbox("venus-O-toggle", (on) => setVisible(layers.venus.contours, on));
+
+onCheckbox("mercury-planet-toggle", (on) => setVisible(layers.mercury.planet, on));
+onCheckbox("mercury-B-toggle", (on) => setVisible(layers.mercury.lines, on));
+
+let selectedMercuryTexture = "albedo"
+
+function setMercuryTexture(name) {
+  selectedMercuryTexture = name;
+  const path = MERCURY_TEXTURES[name];
+  const apply = (texture) => {
+    if (selectedMercuryTexture !== name) return;
+    for (const planet of layers.mercury.planet) {
+      planet.material.map = texture;
+      planet.material.needsUpdate = true;
+    }
+  };
+  if (textureCache[path]) apply(textureCache[path]);
+  else textureLoader.load(path, (texture) => { textureCache[path] = texture; apply(texture); });
+}
+
+for (const radio of document.querySelectorAll('input[name="mercury-texture"]')) {
+  radio.addEventListener("change", () => {
+    if (radio.checked) setMercuryTexture(radio.value);
+  });
+}
+
 function animate() {
   requestAnimationFrame(animate);
+  controls.update();
   renderer.render(active_scene, camera);
 }
 animate()
