@@ -54,6 +54,8 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.target.set(0, 0, 0);
 controls.enableDamping = true;
 controls.rotationSpeed = 0.5;
+controls.minDistance = 1;
+controls.maxDistance = 50;
 controls.update();
 
 function resize() {
@@ -68,7 +70,9 @@ new ResizeObserver(resize).observe(container);
 resize();
 
 const venus_scene = new THREE.Scene();
+
 const mercury_scene = new THREE.Scene();
+
 
 let active_scene = venus_scene;
 
@@ -205,6 +209,21 @@ buildScenes().catch((error) => {
   console.error("Error building scenes:", error);
 });
 
+function starBackground(count = 1500, radius = 100) {
+  const positions = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      const z = Math.random() * 2 - 1;
+      const angle = Math.random() * Math.PI * 2;
+      const ring = Math.sqrt(1 - z * z);
+      positions.set([ring * Math.cos(angle) * radius, z * radius, ring * Math.sin(angle) * radius], i * 3);
+    }
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    return new THREE.Points(geometry, new THREE.PointsMaterial({ size: 0.25, color: 0x9fb0d0 }));
+  }
+venus_scene.add(starBackground());
+mercury_scene.add(starBackground());
+
 document.getElementById("venus-button").addEventListener("click", () => {
   active_scene = venus_scene;
   showOptions("venus")
@@ -224,12 +243,22 @@ document.getElementById("auto-rotate-button").addEventListener("click", () => {
   document.getElementById("auto-rotate-button").classList.toggle("active", controls.autoRotate);
 });
 
+let activePlanet = "venus";
+const infoPanel = document.querySelector(".information-panel");
+
+function updateInfo(){
+  infoPanel.hidden = !document.getElementById(`${activePlanet}-information-toggle`).checked;
+  document.getElementById("venus-information").hidden = activePlanet !== "venus";
+  document.getElementById("mercury-information").hidden = activePlanet !== "mercury"
+}
 
 function showOptions(planetName) {
+  activePlanet = planetName;
   document.getElementById("venus-panel").hidden = planetName !== "venus";
   document.getElementById("mercury-panel").hidden = planetName !== "mercury";
-
+  updateInfo();
 }
+
 showOptions("venus");
 
 function setVisible(objects, visible) {
@@ -246,6 +275,9 @@ onCheckbox("venus-O-toggle", (on) => setVisible(layers.venus.contours, on));
 
 onCheckbox("mercury-planet-toggle", (on) => setVisible(layers.mercury.planet, on));
 onCheckbox("mercury-B-toggle", (on) => setVisible(layers.mercury.lines, on));
+
+onCheckbox("venus-information-toggle", updateInfo);
+onCheckbox("mercury-information-toggle", updateInfo);
 
 let selectedMercuryTexture = "albedo"
 

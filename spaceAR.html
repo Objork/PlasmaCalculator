@@ -107,6 +107,31 @@
         .ar-page .layers-panel { top: auto; bottom: 12px; left: 12px; right: 12px; width: auto; max-height: 40%; }
         }
 
+        .ar-page .information-panel {
+            position: absolute;
+            top: 64px;
+            left: 12px;
+            z-index: 10;
+            width: min(460px, 40vw);
+            max-height: calc(100% - 76px);
+            overflow: auto;
+            padding: 16px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(20, 24, 36, 0.8);
+            color: #fff;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        .ar-page .information-panel [hidden],
+        .ar-page .information-panel[hidden] { display: none; }
+        .ar-page .information-panel p { margin: 0 0 8px; }
+
+        @media (max-width: 640px) {
+            .ar-page .information-panel { width: auto; right: 12px; max-height: 35%; }
+        }
+        
+
     </style>
     <script type="importmap">
     {
@@ -157,6 +182,7 @@
                 <label><input type="checkbox" id="venus-planet-toggle" checked> Planet</label>
                 <label><input type="checkbox" id="venus-B-toggle" checked> Magnetic field lines</label>
                 <label><input type="checkbox" id="venus-O-toggle" checked> O<sup>+</sup></label>
+                <label><input type="checkbox" id="venus-information-toggle" checked> Information</label>
             </div>
             <div id="mercury-panel" hidden>
                 <h2>Mercury</h2>
@@ -164,7 +190,43 @@
                 <label><input type="checkbox" id="mercury-B-toggle" checked> Magnetic field lines</label>
                 <label><input type="radio" name="mercury-texture" value="albedo" checked>  Mercury surface albedo</label>
                 <label><input type="radio" name="mercury-texture" value="composition"> Mercury surface composition</label>
+                <label><input type="checkbox" id="mercury-information-toggle" checked> Information</label>
             </div>
+        </div>
+        <div class="information-panel">
+            <div id="venus-information">
+                <p>Venus, the second planet from the Sun, is almost a sister to our Earth - it is about the same mass and size as the Earth.
+                    However, Venus's atmosphere consists mostly of carbon dioxide, with clouds of sulfuric acid. Additionally, the atmosphere
+                    is very thick, leading to crushing pressure on the surface and a runaway greenhouse effect, dramatically increasing the surface
+                    temperatures to over 400&#8451;. 
+                </p>
+                <p>
+                    The magnetic field lines carried by the solar wind are draped around the Venusian ionosphere. This is due the fact that Venus has
+                    no magnetic field of its own, and the solar wind can interact directly with the upper atmosphere. However, the solar wind cannot penetrate
+                    the thick ionosphere, meaning that the flow, and therefore the magnetic field lines, has to go around the planet.
+                </p>
+                <p>
+                    The pink and blue surfaces seen in the model are the contours of the O<sup>+</sup> ion density in the ionosphere of Venus. The particles
+                    are getting stripped away from the upper atmosphere by the solar wind. Pinker contours, closer to the planet, indicate higher densities.
+                </p>
+            </div>
+            <div id="mercury-information" hidden>
+                <p>
+                    Mercury is the closest planet to the Sun, at an average distance of 0.34 AU or about 50 million kilometers. The distance between Mercury 
+                    and the Sun is quite variable, as Mercury's orbit is elliptical. Due to its close proximity to the Sun, Mercury is exposed to strong 
+                    solar illumination, radiation and solar winds. Mercury does have a weak (relative to Earth) intrinsic magnetic field, but virtually no atmosphere (extremely thin exosphere).
+                    The albedo map of Mercury is provided by NASA/MESSENGER.    
+                </p>
+                <p>
+                    A false color image of Mercury's surface, highlighting differences in surface composition is provided. 
+                    The colors are derived from the MDIS instrument aboard NASA's MESSENGER spacecraft, using spectral data at wavelengths of
+                    430, 750 and 1000 nm, from visible into infrared channels. The exact surface composition remains largely unknown.
+                </p>
+                <p>
+                    Magnetic field lines of Mercury and solar winds are displayed with a purple to yellow color gradient, where brighter yellow colors
+                    indicate regions of higher magnetic field strengths.
+                </p>
+            </div>  
         </div>
         <div class="brain-container" id="brain-container"></div>
     </div>
