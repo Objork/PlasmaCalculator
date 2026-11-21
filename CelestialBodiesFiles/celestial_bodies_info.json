@@ -1,7 +1,7 @@
 {
     "mercury.vtkjs": {
         "title": "Mercury",
-        "text": "Text about Mercury"
+        "text": "<b>Magnetic Field: </b>"
     },
     "venus.vtkjs": {
         "title": "Venus",

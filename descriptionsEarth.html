@@ -53,7 +53,7 @@
             <p class="card-text"> <span style="color: red; font-weight: bolder; ">Shape:</span> A paraboloid (a rotated parabola about the
               x-axis), <br>
 
-              <span style="color: red; font-weight: bolder;  ">Functional form:</span> The bow shock is formed at the
+              <span style="color: red; font-weight: bolder;  ">Functional form:</span> The magnetopause is formed at the
               points (<math>
                   <msub>
                       <mi>x</mi>
@@ -114,10 +114,10 @@
                       <mi>&lambda;</mi>
                       <mn>o</mn>
                   </msub>
-                  <mo> .</mo>
+                  <mspace width="thinmathspace"/>
 
                   <mi>&mu;</mi>
-                  <mo>.</mo>
+                  <mspace width="thinmathspace"/>
                   <mi>cos(&phi;)</mi>
               </math><br>
               <math>
@@ -132,10 +132,10 @@
                       <mi>&lambda;</mi>
                       <mn>o</mn>
                   </msub>
-                  <mo> .</mo>
+                  <mspace width="thinmathspace"/>
 
                   <mi>&mu;</mi>
-                  <mo>.</mo>
+                  <mspace width="thinmathspace"/>
                   <mi>sin(&phi;)</mi>
               </math><br>
               <math>
@@ -176,44 +176,20 @@
               <br>
               <span style="color: red; font-weight: bolder; ">Derivation of the free parameters: </span> The subsolar
               point of the magnetopause, i.e. the value of x at the point where the magnetopause crosses the x-axis is
-              derived from the pressure balance equation by assuming that the dynamic pressure, P<sub>dyn</sub>, <br>
+              derived from the pressure balance equation by assuming that the dynamic pressure, <br>
               <math>
-                  <mi>
-                      <msub>
-                          <mi>P</mi>
-                          <mn>dyn</mn>
-                      </msub>
-                  </mi>
-                  <mo>=</mo>
-                  <mn>
-                      <mi>&kappa;</mi>
-                      <mo>.</mo>
-                      <mi>
-                          <msub>
-                              <mi>m</mi>
-                              <mn>p</mn>
-                          </msub>
-                      </mi>
-
-
-                      <mo>.</mo>
-                      <msup>
-                          <mi>
-                              <msub>
-                                  <mi>U</mi>
-                                  <mn>sw</mn>
-                              </msub>
-                          </mi>
-                          <mn>2</mn>
-                      </msup>
-                      <mo>.</mo>
-                      <mi>
-                          <msub>
-                              <mi>n</mi>
-                              <mn>sw</mn>
-                          </msub>
-                      </mi>
-                  </mn>
+                <msub><mi>P</mi><mi>dyn</mi></msub>
+                <mo>=</mo>
+                <mi>&kappa;</mi>
+                <mspace width="0.1667em"/>
+                <msub><mi>m</mi><mi>p</mi></msub>
+                <mspace width="0.1667em"/>
+                <msup>
+                    <msub><mi>U</mi><mi>sw</mi></msub>
+                    <mn>2</mn>
+                </msup>
+                <mspace width="0.1667em"/>
+                <msub><mi>n</mi><mi>sw</mi></msub>
               </math> , is balance by the magnetic pressure in the magnetosphere,
               <math>
                   <mi>
@@ -228,7 +204,7 @@
                           <mi>B</mi>
                           <mn>2</mn>
                       </msup>
-                      <mi>2. &mu;</mi>
+                      <mi>2&mu;</mi>
                   </mfrac>
 
               </math> that is, <br>
@@ -249,11 +225,11 @@
               </math> <br>
               Here kappa, <math>
                   <mi>&kappa;</mi>
-              </math>, is a given dimensionless parameter which its value is close to one, m<sub>p</sub> is the mass
-              of a proton, U<sub>SW</sub> is the speed of the solar wind, and n<sub>SW</sub> is the density of the
+              </math>, is a given dimensionless parameter which its value is close to one, <b>m<sub>p</sub></b> is the mass
+              of a proton, <b>U<sub>SW</sub></b> is the speed of the solar wind, and <b>n<sub>SW</sub></b> is the density of the
               solar wind.
               <br>
-              MORE TEXT HERE
+              
 </p>
            </div>
         <div class="col-sm-6">
@@ -282,22 +258,15 @@
                   </mi>
                   <mo>=</mo>
                   <mfrac>
-                      <mn>
-                          <msub>
-                              <mi>L</mi>
-                              <mn>BS</mn>
-                          </msub>
-                      </mn>
-                      <mi>
-                          <mn>1</mn>
-                          <mo>+</mo>
-                          <msub>
-                              <mi>ecc</mi>
-                              <mn>BS</mn>
-                          </msub>
-                          <mo>.</mo>
-                          <mn>cos(&theta;)</mn>
-                      </mi>
+                    <msub><mi>L</mi><mi>BS</mi></msub>
+                    <mrow>
+                        <mn>1</mn>
+                        <mo>+</mo>
+                        <msub><mi>&epsilon;</mi><mi>BS</mi></msub>
+                        <mspace width="0.1667em"/>
+                        <mi>cos</mi>
+                        <mo>(</mo><mi>&theta;</mi><mo>)</mo>
+                    </mrow>
                   </mfrac>
 
               </math> <br>
@@ -313,7 +282,7 @@
                       <mi>r</mi>
                       <mn>BS</mn>
                   </msub>
-                  <mo> .</mo>
+                  <mspace width="thinmathspace"/>
 
                   <mi>cos(&theta;)</mi>
                   <mo> +</mo>
@@ -339,7 +308,7 @@
                       <mi>r</mi>
                       <mn>BS</mn>
                   </msub>
-                  <mo> .</mo>
+                  <mspace width="thinmathspace"/>
 
                   <mi>sin(&theta;)</mi>
 
@@ -376,14 +345,17 @@
                       </msqrt>
                   </mn>
               </math> <br>
-              Here r<sub>B</sub> is the distance from the focus at x = x<sub>o</sub> on the x-axis which points from
+              Here r<sub>BS</sub> is the distance from the focus at x = x<sub>oBS</sub> on the x-axis which points from
               the center of the object toward the Sun. <math><mi>&theta;</mi></math> is the angle between the x-axis and the direction of
-              the point on the bow shock. The ecc<sub>BS</sub> is the eccentricity and and L<sub>BS</sub> is the
+              the point on the bow shock. The <math><mi>&epsilon;</mi></math><sub>BS</sub> is the eccentricity and L<sub>BS</sub> is the
               semi-latus rectum.
-
               <br>
               <span style="color: red; font-weight: bolder; ">Derivation of the free parameters: </span> <br>
-              MORE TEXT HERE
+              The bow shock is assumed to be a conic section that shares its axis with the magnetopause. The subsolar point of the bow shock is
+              calculated as a multiple of the magnetopause subsolar point, multiplied by the inputted shock/magnetopause distance ratio. The focus
+              of the bow shock is also calculated using the same ratio, multiplied with the focus of the magnetopause. The semi-latus rectum is calculated 
+              from the difference between the bow shock nose and focus points and scaled with the eccentricity (L<sub>BS</sub> = (x<sub>nose,BS</sub> − x<sub>o,BS</sub>)(1 + <math><mi>&epsilon;</mi></math><sub>BS</sub>)).
+              The shock is traced for angle <math><mi>&theta;</mi></math>, from 0 to a maximum of 140<math><mi>&deg;</mi></math>.
                
 
 </p>
