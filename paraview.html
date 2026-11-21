@@ -135,7 +135,7 @@
     function updateInfoPanel(file) {
         var infoEntry = info[file] || {title: "Unknown", text: "No information available."};
         document.getElementById("infoTitle").textContent = infoEntry.title;
-        document.getElementById("infoText").textContent = infoEntry.text;
+        document.getElementById("infoText").innerHTML = infoEntry.text;
     }
 
     var loadId = 0;
